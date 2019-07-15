@@ -175,7 +175,7 @@ void printCheck(Board& b, bool turn) {
 				if (b.pieces[i][j] != nullptr) {
 					if (b.pieces[i][j]->name == "K") {
 						if (b.pieces[i][j]->getColor() == WHITE) {
-							printSquare(b.coords[i][j], RED,2);
+							printSquare(b.coords[i][j], RED, 6);
 							b.pieces[i][j]->draw();
 							return;
 						}
@@ -190,7 +190,7 @@ void printCheck(Board& b, bool turn) {
 				if (b.pieces[i][j] != nullptr) {
 					if (b.pieces[i][j]->name == "K") {
 						if (b.pieces[i][j]->getColor() == BLACK) {
-							printSquare(b.coords[i][j], RED, 2);
+							printSquare(b.coords[i][j], RED, 6);
 							b.pieces[i][j]->draw();
 							return;
 						}

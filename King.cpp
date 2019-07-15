@@ -17,17 +17,21 @@ bool King::isValid(int x, int y, Board& b) {
 		if (b.pieces[x][y]->getColor() == color) {
 			if (b.pieces[x][y]->name == "R") {
 				if (moves == 0 && b.pieces[x][y]->moves == 0) {
-					bool flag = true;
+					bool flag = true, test = false;
+					if (color == 0)
+						test = true;
+					if (b.isCheck(test))
+						flag = false;
 					if (y == 0) {
 						if (color == 0) {
 							for (int i = 1; i < 3; i++) {
-								if (b.pieces[x][i] != nullptr || !(b.isSafe(point(x, y), x, i)))
+								if (b.pieces[x][i] != nullptr || (!b.isSafe(position, x, i)))
 									flag = false;
 							}
 						}
 						else {
 							for (int i = 1; i < 4; i++) {
-								if (b.pieces[x][i] != nullptr || (!(b.isSafe(point(x, y), x, i) && i < 3)))
+								if (b.pieces[x][i] != nullptr || ((!b.isSafe(position, x, i) && i > 1)))
 									flag = false;
 							}
 						}
@@ -35,13 +39,13 @@ bool King::isValid(int x, int y, Board& b) {
 					else if (y == 7) {
 						if (color == 0) {
 							for (int i = 4; i < 7; i++) {
-								if (b.pieces[x][i] != nullptr || (!(b.isSafe(point(x, y), x, i) && i < 6)))
+								if (b.pieces[x][i] != nullptr || ((!b.isSafe(position, x, i) && i < 6)))
 									flag = false;
 							}
 						}
 						else {
 							for (int i = 5; i < 7; i++) {
-								if (b.pieces[x][i] != nullptr || !(b.isSafe(point(x, y), x, i)))
+								if (b.pieces[x][i] != nullptr || (!b.isSafe(position, x, i)))
 									flag = false;
 							}
 						}

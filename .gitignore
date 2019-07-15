@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/GP142DEM/v16
+/Debug
+/ChessSave.dat
+/Dead.dat

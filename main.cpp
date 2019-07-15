@@ -5,13 +5,7 @@
 #include <math.h>
 #include "Utilities.h"
 #include "Board.h"
-#include "Piece.h"
-#include "Pawn.h"
-#include "Rook.h"
-#include "Knight.h"
-#include "Bishop.h"
-#include "Queen.h"
-#include "King.h"
+
 #define PI 3.1415926535
 #define ANIMATE_MSG "Select \"Animate\"\nOn the \"Run\" Menu"
 #define TEXT_SIZE 20
@@ -53,7 +47,7 @@ int main() {
 	bool selection = false;
 	int clicks = 0;
 	GP142_point currPos = { -1,-1 }, moveFrom = { -1,-1 }, moveTo = { -1,-1 },
-		temp = { -1,-1 }, m1 = { -1,-1 };
+		temp = { -1,-1 }, m1 = { -1,-1 }, m2 = { -1,-1 };
 	//The Event Loop  
 	while (!quit) {
 		saveGame(b, turn, check);
@@ -94,13 +88,15 @@ int main() {
 								if (b.isSafe(currPos, temp.x, temp.y)) {
 									b.move(currPos, temp.x, temp.y);
 									b.switchTurn();
-									m1 = currPos;
+									m1 = currPos, m2 = temp;
 									check = b.isCheck(turn);
 									if (b.isCheckMate(turn)) {
 										b.printBKGND();
 										b.print();
 										if (check) {
+											
 											printText("Check Mate!");
+											printCheck(b, !turn);
 											if (turn)
 												printText("\n\nBLUE WINS!");
 											else
@@ -158,7 +154,7 @@ int main() {
 			}
 			//b.printBKGND();
 			b.print();
-			b.printLastMove(m1, temp);
+			b.printLastMove(m1, m2);
 			printSelection(currPos, b, selection, BLUE);
 			b.printMoves(currPos, selection);
 			break;
